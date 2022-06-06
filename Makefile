@@ -42,9 +42,15 @@ install-js-dependencies:
 install-dependencies: install-go-dependencies install-js-dependencies
 
 #: Teardown and start a local Grafana instance
-bootstrap: teardown
+start: teardown
 	docker-compose up -d grafana
 	@echo "Go to http://localhost:3000/"
+
+#: Start a local Grafana instance and the frontend in watch mode
+start-dev:
+	docker-compose up -d grafana
+	@echo "Go to http://localhost:3000/"
+	npx grafana-toolkit plugin:dev --watch
 
 #: Teardown the docker resources
 teardown:
